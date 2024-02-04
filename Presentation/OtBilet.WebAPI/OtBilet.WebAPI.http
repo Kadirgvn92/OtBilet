@@ -1,0 +1,6 @@
+@OtBilet.WebAPI_HostAddress = http://localhost:5156
+
+GET {{OtBilet.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
