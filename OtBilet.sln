@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtBilet.WebAPI", "OtBilet.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtBilet.PresentationLayer", "OtBilet.PresentationLayer\OtBilet.PresentationLayer.csproj", "{4327FCFD-904E-49E6-A1D2-D3DCC1D7D081}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtBilet.BusinessLayer", "OtBilet.BusinessLayer\OtBilet.BusinessLayer.csproj", "{9E22D36D-1458-445C-AAE4-696108A77702}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4327FCFD-904E-49E6-A1D2-D3DCC1D7D081}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4327FCFD-904E-49E6-A1D2-D3DCC1D7D081}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4327FCFD-904E-49E6-A1D2-D3DCC1D7D081}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E22D36D-1458-445C-AAE4-696108A77702}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E22D36D-1458-445C-AAE4-696108A77702}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E22D36D-1458-445C-AAE4-696108A77702}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E22D36D-1458-445C-AAE4-696108A77702}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
