@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OtBilet.BusinessLayer.Abstract;
 using OtBilet.DAL.Context;
 
 namespace OtBilet.WebAPI.Controllers;
@@ -7,17 +8,16 @@ namespace OtBilet.WebAPI.Controllers;
 [ApiController]
 public class PassengerController : ControllerBase
 {
-    private readonly OtBiletDbContext _db;
+    private readonly IPassengerService _passengerService;
 
-    public PassengerController(OtBiletDbContext db)
+    public PassengerController(IPassengerService passengerService)
     {
-        _db = db;
+        _passengerService = passengerService;
     }
-
     [HttpGet]
-    public IActionResult GetPassenger()
+    public IActionResult GetPassanger()
     {
-        var values = _db.Passengers.ToList();
-        return Ok(values);
+        var values =  _passengerService.TGetAll();
+        return Ok(values);  
     }
 }

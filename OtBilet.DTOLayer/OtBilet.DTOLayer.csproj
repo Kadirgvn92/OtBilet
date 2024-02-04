@@ -11,9 +11,4 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\OtBilet.DAL\OtBilet.DAL.csproj" />
-    <ProjectReference Include="..\OtBilet.EntityLayer\OtBilet.EntityLayer.csproj" />
-  </ItemGroup>
-
 </Project>

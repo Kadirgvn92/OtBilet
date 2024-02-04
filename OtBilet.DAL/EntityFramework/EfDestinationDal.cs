@@ -1,4 +1,5 @@
-﻿using OtBilet.DAL.Context;
+﻿using OtBilet.DAL.Abstract;
+using OtBilet.DAL.Context;
 using OtBilet.DAL.Repository;
 using OtBilet.EntityLayer;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace OtBilet.DAL.EntityFramework;
-public class EfDestinationDal : GenericRepository<Destination>
+public class EfDestinationDal : GenericRepository<Destination>, IDestinationDal
 {
 	public EfDestinationDal(OtBiletDbContext db) : base(db)
 	{

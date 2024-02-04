@@ -19,12 +19,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
 
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OtBilet.BusinessLayer\OtBilet.BusinessLayer.csproj" />
     <ProjectReference Include="..\OtBilet.DAL\OtBilet.DAL.csproj" />
     <ProjectReference Include="..\OtBilet.EntityLayer\OtBilet.EntityLayer.csproj" />
     <ProjectReference Include="..\OtBilet.WebAPI\OtBilet.WebAPI.csproj" />
