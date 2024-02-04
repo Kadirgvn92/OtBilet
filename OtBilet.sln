@@ -7,13 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtBilet.EntityLayer", "OtBi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtBilet.DAL", "OtBilet.DAL\OtBilet.DAL.csproj", "{EB89A6AA-1E40-4635-B73B-7529BF1B9C55}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtBilet.WebAPI", "OtBilet.WebAPI\OtBilet.WebAPI.csproj", "{433C3271-94A3-4C85-BD92-1D56DEB8E166}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtBilet.PresentationLayer", "OtBilet.PresentationLayer\OtBilet.PresentationLayer.csproj", "{4327FCFD-904E-49E6-A1D2-D3DCC1D7D081}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtBilet.BusinessLayer", "OtBilet.BusinessLayer\OtBilet.BusinessLayer.csproj", "{9E22D36D-1458-445C-AAE4-696108A77702}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtBilet.DTOLayer", "OtBilet.DTOLayer\OtBilet.DTOLayer.csproj", "{F737A81C-25D3-476E-A2CA-C84EC06849D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtBilet.DTOLayer", "OtBilet.DTOLayer\OtBilet.DTOLayer.csproj", "{F737A81C-25D3-476E-A2CA-C84EC06849D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{EB89A6AA-1E40-4635-B73B-7529BF1B9C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB89A6AA-1E40-4635-B73B-7529BF1B9C55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB89A6AA-1E40-4635-B73B-7529BF1B9C55}.Release|Any CPU.Build.0 = Release|Any CPU
-		{433C3271-94A3-4C85-BD92-1D56DEB8E166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{433C3271-94A3-4C85-BD92-1D56DEB8E166}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{433C3271-94A3-4C85-BD92-1D56DEB8E166}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{433C3271-94A3-4C85-BD92-1D56DEB8E166}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4327FCFD-904E-49E6-A1D2-D3DCC1D7D081}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4327FCFD-904E-49E6-A1D2-D3DCC1D7D081}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4327FCFD-904E-49E6-A1D2-D3DCC1D7D081}.Release|Any CPU.ActiveCfg = Release|Any CPU

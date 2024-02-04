@@ -29,8 +29,8 @@
   <ItemGroup>
     <ProjectReference Include="..\OtBilet.BusinessLayer\OtBilet.BusinessLayer.csproj" />
     <ProjectReference Include="..\OtBilet.DAL\OtBilet.DAL.csproj" />
+    <ProjectReference Include="..\OtBilet.DTOLayer\OtBilet.DTOLayer.csproj" />
     <ProjectReference Include="..\OtBilet.EntityLayer\OtBilet.EntityLayer.csproj" />
-    <ProjectReference Include="..\OtBilet.WebAPI\OtBilet.WebAPI.csproj" />
   </ItemGroup>
 
 </Project>

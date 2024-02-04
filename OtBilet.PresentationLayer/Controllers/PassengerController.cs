@@ -1,28 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using OtBilet.BusinessLayer.Abstract;
 using OtBilet.EntityLayer;
 using OtBilet.PresentationLayer.DTO.PassengerDTO;
 
 namespace OtBilet.PresentationLayer.Controllers;
 public class PassengerController : Controller
 {
-    private readonly IHttpClientFactory _httpClientFactory;
+   private readonly IPassengerService _passengerService;
 
-    public PassengerController(IHttpClientFactory httpClientFactory)
+    public PassengerController(IPassengerService passengerService)
     {
-        _httpClientFactory = httpClientFactory;
+        _passengerService = passengerService;
     }
 
-    public async Task<IActionResult> Index()
+    public IActionResult Index()
     {
-        var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.GetAsync("https://localhost:44366/api/Passenger");
-		if (responseMessage.IsSuccessStatusCode)
-		{
-			var jsonData = await responseMessage.Content.ReadAsStringAsync();
-			var values = JsonConvert.DeserializeObject<List<Passenger>>(jsonData);
-			return View(values);
-		}
-		return View();
-	}
+        var values = _passengerService.TGetAll();
+        return View(values);
+    }
 }

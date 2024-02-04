@@ -1,4 +1,6 @@
 using OtBilet.DAL.Context;
+using OtBilet.BusinessLayer.Container;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<OtBiletDbContext>();
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());    
+
+builder.Services.ContainerDependencies();
 
 builder.Services.AddHttpClient();
 
