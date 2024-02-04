@@ -8,4 +8,5 @@ using System.Threading.Tasks;
 namespace OtBilet.DAL.Abstract;
 public interface IDestinationDal : IGenericDal<Destination>
 {
+    public List<Destination> GetDestinationsByFilter(Destination destination);
 }
