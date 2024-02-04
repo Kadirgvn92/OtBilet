@@ -23,4 +23,8 @@
     <ProjectReference Include="..\OtBilet.EntityLayer\OtBilet.EntityLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstract\" />
+  </ItemGroup>
+
 </Project>
