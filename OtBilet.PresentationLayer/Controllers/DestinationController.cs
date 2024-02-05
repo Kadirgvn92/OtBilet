@@ -21,18 +21,22 @@ public class DestinationController : Controller
     [HttpGet]
     public IActionResult CreateDestination()
     {
-        List<SelectListItem> values = (from x in _destinationService.TGetAll()
-                                       select new SelectListItem
-                                       {
-                                           Text = x.Departure.ToString(),
-                                           Value = x.DestinationID.ToString()
-                                       }).ToList();
-        List<SelectListItem> values2 = (from x in _destinationService.TGetAll()
-                                       select new SelectListItem
-                                       {
-                                           Text = x.Arrive.ToString(),
-                                           Value = x.DestinationID.ToString()
-                                       }).ToList();
+         var values = Enum.GetValues(typeof(Departure))
+                              .Cast<Departure>()
+                              .Select(x => new SelectListItem
+                              {
+                                  Text = x.ToString(),
+                                  Value = ((int)x).ToString()
+                              })
+                              .ToList();
+        var values2 = Enum.GetValues(typeof(Arrive))
+                           .Cast<Arrive>()
+                           .Select(x => new SelectListItem
+                           {
+                               Text = x.ToString(),
+                               Value = ((int)x).ToString()
+                           })
+                           .ToList();
         ViewBag.v = values;
         ViewBag.v2 = values2;
         return View();
@@ -40,7 +44,11 @@ public class DestinationController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateDestination(CreateDestinationDTO destination)
     {
-
+        if (destination.Departure.ToString() == destination.Arrive.ToString())
+        {
+            ModelState.AddModelError("", "Kalkış Noktası ile Varış Noktası aynı yer seçtiniz..Lütfen tekrar deneyin.");
+            return View(destination);
+        }
         Destination des = new Destination()
         {
             Arrive = destination.Arrive,
@@ -52,6 +60,6 @@ public class DestinationController : Controller
         };
 
         _destinationService.TAdd(des);
-        return RedirectToAction("Index", "Destination");
+        return RedirectToAction("SearchDestination", "Dashboard");
     }
 }
