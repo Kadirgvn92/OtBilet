@@ -26,8 +26,7 @@ public enum Departure
     Antalya,
     Bursa,
     Adana,
-    Eskisehir,
-    // Diğer şehirler...
+    Eskisehir
 }
 
 public enum Arrive
@@ -38,6 +37,5 @@ public enum Arrive
     Antalya,
     Bursa,
     Adana,
-    Eskisehir,
-    // Diğer şehirler...
+    Eskisehir
 }

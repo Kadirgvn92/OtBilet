@@ -12,19 +12,31 @@ public class DashboardController : Controller
     {
         _destinationService = destinationService;
     }
+    [HttpGet]
+    public IActionResult Index()
+    {
+        
+        return View();
+    }
 
-    public IActionResult Index(Destination destination2)
-	{
-		var values = _destinationService.TGetDestinationsByFilter(destination2);
-		return RedirectToAction("SearchDestination");
-	}
+    [HttpGet]
+    public IActionResult SearchDestination()
+    {
+        return View(); 
+    }
 
-	//burada en son Index kısmında nereden nereye görsel oluşturduk daha sonra araya bastığında destination 
-	//arama yapacak ve alttaki searchdestination methodu çalışacak ve liste diğer sayfada görülecek
+    [HttpPost]
+    public IActionResult SearchDestination(SearchDestinationDTO destinationDTO)
+    {
+        if (destinationDTO.Departure.ToString() == destinationDTO.Arrive.ToString())
+        {
+            ModelState.AddModelError("", "Kalkış Noktası ile Varış Noktası aynı yer seçilemez.Lütfen tekrar deneyin.");
+            return View(destinationDTO);
+        }
+        // _destinationService.TGetDestinationsByFilter metodunu kullanarak destinasyonları çektim
+        var destinations = _destinationService.TGetDestinationsByFilter(destinationDTO);
 
-	public IActionResult SearchDestination(Destination destination)
-	{
-		var values = _destinationService.TGetDestinationsByFilter(destination);
-		return View(values);
-	}
+        // Elde ettiğin destinasyonları bir view'e gönderdim
+        return View("Index", destinations);
+    }
 }

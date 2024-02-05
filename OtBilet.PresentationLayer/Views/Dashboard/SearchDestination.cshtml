@@ -1,5 +1,4 @@
-﻿
-@model List<Destination>
+﻿@model SearchDestinationDTO
 
 @{
     ViewData["Title"] = "SearchDestination";
@@ -8,62 +7,110 @@
 
 
 <div class="content-wrapper">
-	<div class="container-fluid">
-		<h4 class="page-title">Otobüs Arama İşlemleri</h4>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-header">
-						<div class="card-title">Otobüs Bilgileri</div>
-					</div>
-					<div class="card-body">
-						<div class="card-sub">
-							
-						</div>
-						<table class="table mt-3">
-							<thead>
-								<tr>
-									<th scope="col">Nereden?</th>
-									<th scope="col">Nereye ?</th>
-									<th scope="col">Fiyat</th>
-									<th scope="col"></th>
-									<th scope="col">Sil</th>
-									<th scope="col">Güncelle</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach (var item in Model)
-								{
-								<td >
-									<div class="d-flex px-2 py-1">
-										<div>
-											<img src="/AdminLTE-3.2.0/dist/img/OtBilet.png" class="rounded me-3" style="width:100px;height:100px;" alt="user1">
+    <div class="content">
+        <div class="container-fluid p-3">
+            <div class="card h-100 col-md-6 pt-4">
+                <div class="card-header pb-0 p-3">
+                    <div class="row">
+                        <div class="col-md-12 d-flex justify-content-between align-items-center ">
+                            <div>
+                                <img src="/AdminLTE-3.2.0/dist/img/OtBilet.png" class="rounded me-3" style="width:100px;height:100px;" alt="user1">
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="card-body p-3 ">
+                    <h6 class="mb-0 text-dark "> OtBilet uygulamasına hoşgeldiniz. Seferleri arama yapabilir size uygun otobüslerle seyahat keyfini çıkarabilirsiniz</h6>
+                    <br />
+                    <hr class="horizontal gray-light my-0">
+                    <form method="post" >
+                        <div class="form-group">
+                            <label>Nereden ?</label>
+                            <select class="form-control form-control-s" asp-for="Departure" id="departure">
+                                <option value="0">İstanbul</option>
+                                <option value="1">Ankara</option>
+                                <option value="2">İzmir</option>
+                                <option value="3">Antalya</option>
+                                <option value="4">Bursa</option>
+                                <option value="5">Adana</option>
+                                <option value="6">Eskisehir</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Nereye ?</label>
+                            <select class="form-control form-control-s" asp-for="Arrive" id="arrive">
+                                <option value="0">İstanbul</option>
+                                <option value="1">Ankara</option>
+                                <option value="2">İzmir</option>
+                                <option value="3">Antalya</option>
+                                <option value="4">Bursa</option>
+                                <option value="5">Adana</option>
+                                <option value="6">Eskisehir</option>
+                            </select>
+                        </div>
+                        <label>Tarih</label>
+                        <div class="form-group d-flex justify-content-between">
+                            
+                            <input type="date" id="date" class="form-control form-control-s" asp-for="DepatureDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="@DateTime.Now.AddDays(30).ToString("yyyy-MM-dd")" placeholder="Tarihi seçin">
+                            &nbsp;
+                            <a href="#" class="btn btn-info" onclick="setToday()">Bugün</a>
+                            &nbsp;
+                            <a href="#" class="btn btn-info" onclick="setTomorrow()">Yarın</a>
+                        </div>
 
-										</div>
-										<div class="d-flex flex-column justify-content-center ml-4">
-											<h6 class="mb-0 font-weight-bold  text-s">@item.Price ₺</h6>
-										</div>
-									</div>
-								</td>
-								<td class="align-middle" >
-									<p class="text-s  mb-0">@item.DepatureDate</p>
-								</td>
-								<td class="align-middle text-center" >
-									<span class="text-s  mb-0">@item.DepartureHour</span>
-								</td>
-								<td class="align-middle">
-									<span class=" text-s  mb-0">@item.Bus.BusType</span>
-								</td>
-								}
-							</tbody>
-						</table>
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            <div class="alert alert-danger">
+                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                {
+                                    <p>@error.ErrorMessage</p>
+                                }
+                            </div>
+                        }
+                        <button type="submit" class="btn btn-primary">Otobüs Ara</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 
+<script>
+    document.getElementById('date').valueAsDate = new Date();
+
+    document.getElementById("departure").value = "0";
+    document.getElementById("arrive").value = "2";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var firstDropdown = document.getElementById("departure");
+        var secondDropdown = document.getElementById("arrive");
+
+        secondDropdown.addEventListener("change", function () {
+            if (firstDropdown.value === secondDropdown.value) {
+                firstDropdown.value = 0;
+            }
+            
+        });
+        firstDropdown.addEventListener("change", function () {
+            if (secondDropdown.value === firstDropdown.value) {
+                secondDropdown.value = 0;
+            }
+        });
+    });
+
+
+    function setToday() {
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').value = today;
+    }
+
+    function setTomorrow() {
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+        document.getElementById('date').value = tomorrowFormatted;
+    }
+</script>

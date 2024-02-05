@@ -9,5 +9,6 @@ public class DestinationMapping : Profile
     public DestinationMapping()
     {
         CreateMap<Destination,ResultDestinationDTO>().ReverseMap();
+        CreateMap<Destination,SearchDestinationDTO>().ReverseMap();
     }
 }

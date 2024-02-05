@@ -1,5 +1,6 @@
 ﻿using OtBilet.BusinessLayer.Abstract;
 using OtBilet.DAL.Abstract;
+using OtBilet.DTOLayer.DestinationDTO;
 using OtBilet.EntityLayer;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ public class DestinationManager : IDestinationService
 		return _destinationDal.GetByID(id);
 	}
 
-    public List<Destination> TGetDestinationsByFilter(Destination destination)
+    public List<Destination> TGetDestinationsByFilter(SearchDestinationDTO destination)
     {
 		return _destinationDal.GetDestinationsByFilter(destination);
     }

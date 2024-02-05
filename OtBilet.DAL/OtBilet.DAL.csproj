@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OtBilet.DTOLayer\OtBilet.DTOLayer.csproj" />
     <ProjectReference Include="..\OtBilet.EntityLayer\OtBilet.EntityLayer.csproj" />
   </ItemGroup>
 
