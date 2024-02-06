@@ -8,4 +8,5 @@ using System.Threading.Tasks;
 namespace OtBilet.DAL.Abstract;
 public interface ITicketDal : IGenericDal<Ticket>
 {
+    public Ticket CreateTicketByDestinationID(int id);
 }

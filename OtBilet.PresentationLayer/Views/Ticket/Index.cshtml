@@ -1,9 +1,10 @@
-﻿@{
+﻿
+@model Ticket
+
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-
 
 
 <div class="content-wrapper">
@@ -27,17 +28,17 @@
                                     <th>Varış</th>
                                 </tr>
                                 <tr>
-                                    <td>Alibeyköy Otogarı</td>
-                                    <td>Ankara (Aşti) Otogarı</td>
+                                    <td>@Model.Destination.Departure Otogar</td>
+                                    <td>@Model.Destination.Arrive Otogar</td>
                                 </tr>
                                 <tr>
                                     <th>Hareket Zamanı</th>
                                     <th>Koltuk</th>
                                 </tr>
                                 <tr>
-                                    <td>4 Mart Pazartesi 00:05</td>
+                                    <td>@Model.Destination.DepatureDate.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR")) @Model.Destination.DepartureHour.ToString(@"hh\:mm")</td>
                                     <td>
-                                        <div class="seats">  28  </div>
+                                        <div class="seats"> @Model.Seat.SeatNumber  </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -78,7 +79,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                     </div>
-                                    <input type="email" class="form-control" placeholder="Email">
+                                    <input type="email"  class="form-control" placeholder="Email">
                                 </div>
                             </div>
                             <div class="form-group">

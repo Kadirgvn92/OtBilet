@@ -8,4 +8,5 @@ using System.Threading.Tasks;
 namespace OtBilet.BusinessLayer.Abstract;
 public interface ITicketService : IGenericService<Ticket>
 {
+    public Ticket TCreateTicketByDestinationID(int id);
 }

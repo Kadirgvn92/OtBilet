@@ -15,6 +15,6 @@ public class Ticket
     public List<Passenger> Passenger { get; set; }
     public void PNRGenerate(int length)
     {
-        PNR = PNRGenerator.GeneratePNR(length);
+        PNR = PNRGenerator.GeneratePNR();
     }
 }
