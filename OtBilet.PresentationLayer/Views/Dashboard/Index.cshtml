@@ -31,7 +31,7 @@
                         }
                         else
                         {
-                            <table class="table table-striped mt-3">
+                            <table class="table mt-3">
                                 <thead>
                                     <tr>
                                         <th scope="col">Nereden - Nereye?</th>
@@ -43,11 +43,11 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        <tr data-widget="expandable-table" aria-expanded="false">
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="mr-4">
-                                                        <img src="/AdminLTE-3.2.0/dist/img/OtBilet.png" class="rounded me-3" style="width:100px;height:100px;" alt="user1">
+                                                        <img src="/AdminLTE-3.2.0/dist/img/@item.Bus.FirmImageUrl" class="rounded me-3" style="width:150px;height:100px;" alt="user1">
 
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center text-center mr-4">
@@ -75,6 +75,18 @@
                                                 <a href="#" class="btn btn-primary ">Seç</a>
                                             </td>
                                         </tr>
+                                        <tr class="expandable-body ">
+                                            <td colspan="4" class="text-center  ">
+                                                <img src="/AdminLTE-3.2.0/dist/img/bus.png" width="800px" height="300px" />
+                                                &emsp;
+                                                <label>Koltuk No Seçin</label>
+                                                &emsp;
+                                                <input type="number" min="1" max="38" placeholder="No" />
+                                                &emsp;
+                                                <a href="/Ticket/Index" class="btn btn-success">Onayla ve Devam Et</a>
+                                            </td>
+
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
@@ -85,3 +97,24 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" ></script>
+
+<script>
+    $(document).ready(function () {
+        // Tüm satırın expandable-body'sini gizle
+        $('.expandable-body').hide();
+
+        // Tıklama olayını izle
+        $('tr[data-widget="expandable-table"]').click(function () {
+            // Tıklandığında, bu satırın altındaki expandable-body'yi bul
+            var expandableBody = $(this).next('.expandable-body');
+
+            // Tüm diğer expandable-body'leri gizle
+            $('.expandable-body').not(expandableBody).hide();
+
+            // Bu satırın altındaki expandable-body'yi aç veya kapat
+            expandableBody.toggle();
+        });
+    });
+</script>
