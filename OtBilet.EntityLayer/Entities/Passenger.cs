@@ -6,6 +6,7 @@ public class Passenger
     public string Name { get; set; }
     public string Surname { get; set; }
     public string PhoneNumber { get; set; }
+    public string Mail { get; set; }
     public bool Luggage { get; set; }
     public Gender Gender { get; set; }
     public int TicketID { get; set; }
