@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OtBilet.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class mig_init : Migration
+    public partial class initialize : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,12 +19,33 @@ namespace OtBilet.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Plate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PassengerCount = table.Column<int>(type: "int", nullable: false),
+                    FirmName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirmImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Wifi = table.Column<bool>(type: "bit", nullable: false),
                     BusType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Buses", x => x.BusID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Passengers",
+                columns: table => new
+                {
+                    PassengerID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NationalCardNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Mail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Luggage = table.Column<bool>(type: "bit", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Passengers", x => x.PassengerID);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,8 +101,9 @@ namespace OtBilet.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PNR = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SeatNumber = table.Column<int>(type: "int", nullable: false),
-                    SeatID = table.Column<int>(type: "int", nullable: false),
-                    DestinationID = table.Column<int>(type: "int", nullable: false)
+                    DestinationID = table.Column<int>(type: "int", nullable: false),
+                    PassangerID = table.Column<int>(type: "int", nullable: false),
+                    PassengerID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -93,34 +115,10 @@ namespace OtBilet.DAL.Migrations
                         principalColumn: "DestinationID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Tickets_Seats_SeatID",
-                        column: x => x.SeatID,
-                        principalTable: "Seats",
-                        principalColumn: "SeatID");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Passengers",
-                columns: table => new
-                {
-                    PassengerID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NationalCardNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Luggage = table.Column<bool>(type: "bit", nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: false),
-                    TicketID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Passengers", x => x.PassengerID);
-                    table.ForeignKey(
-                        name: "FK_Passengers_Tickets_TicketID",
-                        column: x => x.TicketID,
-                        principalTable: "Tickets",
-                        principalColumn: "TicketID",
+                        name: "FK_Tickets_Passengers_PassengerID",
+                        column: x => x.PassengerID,
+                        principalTable: "Passengers",
+                        principalColumn: "PassengerID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -128,11 +126,6 @@ namespace OtBilet.DAL.Migrations
                 name: "IX_Destinations_BusID",
                 table: "Destinations",
                 column: "BusID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Passengers_TicketID",
-                table: "Passengers",
-                column: "TicketID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Seats_BusID",
@@ -145,16 +138,16 @@ namespace OtBilet.DAL.Migrations
                 column: "DestinationID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tickets_SeatID",
+                name: "IX_Tickets_PassengerID",
                 table: "Tickets",
-                column: "SeatID");
+                column: "PassengerID");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Passengers");
+                name: "Seats");
 
             migrationBuilder.DropTable(
                 name: "Tickets");
@@ -163,7 +156,7 @@ namespace OtBilet.DAL.Migrations
                 name: "Destinations");
 
             migrationBuilder.DropTable(
-                name: "Seats");
+                name: "Passengers");
 
             migrationBuilder.DropTable(
                 name: "Buses");

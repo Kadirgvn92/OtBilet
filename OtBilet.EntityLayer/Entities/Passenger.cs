@@ -9,8 +9,7 @@ public class Passenger
     public string Mail { get; set; }
     public bool Luggage { get; set; }
     public Gender Gender { get; set; }
-    public int TicketID { get; set; }
-    public Ticket Ticket { get; set; }
+    public List<Ticket> Ticket { get; set; }
 }
 public enum Gender
 {

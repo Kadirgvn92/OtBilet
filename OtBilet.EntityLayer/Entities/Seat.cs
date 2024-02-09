@@ -13,5 +13,4 @@ public class Seat
     public bool IsAvailable { get; set; }
     public int BusID { get; set; }
     public Bus Bus { get; set; }
-    public List<Ticket> Tickets { get; set; }
 }

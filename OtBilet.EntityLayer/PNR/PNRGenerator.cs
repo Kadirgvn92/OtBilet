@@ -22,7 +22,4 @@ public class PNRGenerator
 
         return new string(pnrArray);
     }
-
-
-
 }

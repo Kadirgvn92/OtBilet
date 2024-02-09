@@ -12,8 +12,8 @@ using OtBilet.DAL.Context;
 namespace OtBilet.DAL.Migrations
 {
     [DbContext(typeof(OtBiletDbContext))]
-    [Migration("20240206093830_mig_firm")]
-    partial class mig_firm
+    [Migration("20240209102207_initialize")]
+    partial class initialize
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,6 +106,10 @@ namespace OtBilet.DAL.Migrations
                     b.Property<bool>("Luggage")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Mail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -122,12 +126,7 @@ namespace OtBilet.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TicketID")
-                        .HasColumnType("int");
-
                     b.HasKey("PassengerID");
-
-                    b.HasIndex("TicketID");
 
                     b.ToTable("Passengers");
                 });
@@ -171,7 +170,10 @@ namespace OtBilet.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SeatID")
+                    b.Property<int>("PassangerID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PassengerID")
                         .HasColumnType("int");
 
                     b.Property<int>("SeatNumber")
@@ -181,7 +183,7 @@ namespace OtBilet.DAL.Migrations
 
                     b.HasIndex("DestinationID");
 
-                    b.HasIndex("SeatID");
+                    b.HasIndex("PassengerID");
 
                     b.ToTable("Tickets");
                 });
@@ -197,21 +199,10 @@ namespace OtBilet.DAL.Migrations
                     b.Navigation("Bus");
                 });
 
-            modelBuilder.Entity("OtBilet.EntityLayer.Passenger", b =>
-                {
-                    b.HasOne("OtBilet.EntityLayer.Ticket", "Ticket")
-                        .WithMany("Passenger")
-                        .HasForeignKey("TicketID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ticket");
-                });
-
             modelBuilder.Entity("OtBilet.EntityLayer.Seat", b =>
                 {
                     b.HasOne("OtBilet.EntityLayer.Bus", "Bus")
-                        .WithMany("Seats")
+                        .WithMany("Seat")
                         .HasForeignKey("BusID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -227,22 +218,22 @@ namespace OtBilet.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OtBilet.EntityLayer.Seat", "Seat")
-                        .WithMany("Tickets")
-                        .HasForeignKey("SeatID")
-                        .OnDelete(DeleteBehavior.NoAction)
+                    b.HasOne("OtBilet.EntityLayer.Passenger", "Passenger")
+                        .WithMany("Ticket")
+                        .HasForeignKey("PassengerID")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Destination");
 
-                    b.Navigation("Seat");
+                    b.Navigation("Passenger");
                 });
 
             modelBuilder.Entity("OtBilet.EntityLayer.Bus", b =>
                 {
                     b.Navigation("Destinations");
 
-                    b.Navigation("Seats");
+                    b.Navigation("Seat");
                 });
 
             modelBuilder.Entity("OtBilet.EntityLayer.Destination", b =>
@@ -250,14 +241,9 @@ namespace OtBilet.DAL.Migrations
                     b.Navigation("Tickets");
                 });
 
-            modelBuilder.Entity("OtBilet.EntityLayer.Seat", b =>
+            modelBuilder.Entity("OtBilet.EntityLayer.Passenger", b =>
                 {
-                    b.Navigation("Tickets");
-                });
-
-            modelBuilder.Entity("OtBilet.EntityLayer.Ticket", b =>
-                {
-                    b.Navigation("Passenger");
+                    b.Navigation("Ticket");
                 });
 #pragma warning restore 612, 618
         }

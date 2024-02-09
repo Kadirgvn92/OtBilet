@@ -17,7 +17,7 @@ public class Bus
     public bool Wifi { get; set; }
     public BusType BusType { get; set; }
     public List<Destination> Destinations { get; set; }
-    public List<Seat> Seats { get; set; }   
+    public List<Seat> Seat { get; set; }
 }
 
 public enum BusType
