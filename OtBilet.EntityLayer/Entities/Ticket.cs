@@ -10,7 +10,7 @@ public class Ticket
     public int SeatNumber { get; set; }
     public int DestinationID { get; set; }
     public Destination Destination { get; set; }
-    public int PassangerID { get; set; }
+    public int PassengerID { get; set; }
     public Passenger Passenger { get; set; }
 
 }

@@ -20,13 +20,14 @@ public class TicketController : Controller
         var destination = _destinationService.GetDestinationByID(id);
         int seatNumber = Convert.ToInt32(Request.Query["seatNumber"]);
 
-
         _ticketService.TAdd(new Ticket()
         {
             DestinationID = destination.DestinationID,
             SeatNumber = seatNumber,
+            PassengerID = 1,
             PNR = PNRGenerator.GeneratePNR()
         });
+
         var values = _ticketService.GetTicketByDestinationID(id);
 
         return View(values);
