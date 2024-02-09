@@ -28,18 +28,29 @@
                                     <th>Varış</th>
                                 </tr>
                                 <tr>
-                                    <td>@Model.Destination.Departure Otogar</td>
-                                    <td>@Model.Destination.Arrive Otogar</td>
+                                    <td>@ViewBag.Destination.Departure Otogar</td>
+                                    <td>@ViewBag.Destination.Arrive Otogar</td>
                                 </tr>
                                 <tr>
                                     <th>Hareket Zamanı</th>
                                     <th>Koltuk</th>
                                 </tr>
                                 <tr>
-                                    <td>@Model.Destination.DepatureDate.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR")) @Model.Destination.DepartureHour.ToString(@"hh\:mm")</td>
+                                    <td>@ViewBag.Destination.DepatureDate.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR")) @ViewBag.Destination.DepartureHour.ToString(@"hh\:mm")</td>
                                     <td>
-                                        <div class="seats"> @Model.SeatNumber  </div>
+                                        <div class="seats"> @ViewBag.SeatNumber  </div>
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <hr />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>PNR</th>
+                                </tr>
+                                <tr>
+                                    <td>@ViewBag.PNR</td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -79,7 +90,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                     </div>
-                                    <input type="email"  class="form-control" placeholder="Email">
+                                    <input type="email" class="form-control" value="@ViewBag.Passenger.Mail">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -88,7 +99,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                                     </div>
-                                    <input type="email" class="form-control" placeholder="Ad Soyad">
+                                    <input type="text" class="form-control" value="@ViewBag.Passenger.Name @ViewBag.Passenger.Surname">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -98,7 +109,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                                     </div>
-                                    <input type="email" class="form-control" placeholder="TC Kimlik No">
+                                    <input type="text" class="form-control" value="@ViewBag.Passenger.NationalCardNo">
                                 </div>
                             </div>
 
@@ -109,7 +120,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                     </div>
-                                    <input class="form-control" placeholder="(999) 999-99-99" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+                                    <input class="form-control" value="@ViewBag.Passenger.PhoneNumber" data-inputmask='"mask": "(999) 999-9999"' data-mask>
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -138,7 +149,7 @@
                         <div class="col-12">
                             <div class="d-flex flex-column">
                                 <p class="text mb-1">Kart Sahibi Ad Soyad Name</p>
-                                <input class="form-control mb-3" type="text" placeholder="Ad Soyad" value="Kadir GÜVEN">
+                                <input class="form-control mb-3" type="text" placeholder="Ad Soyad" >
                             </div>
                         </div>
                         <div class="col-12">

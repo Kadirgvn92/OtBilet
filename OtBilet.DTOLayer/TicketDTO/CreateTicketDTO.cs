@@ -10,8 +10,8 @@ public class CreateTicketDTO
 {
     public string PNR { get; set; }
     public int SeatNumber { get; set; }
-    public int SeatID { get; set; }
-    public Seat Seat { get; set; }
+    public int PassengerID { get; set; }
+    public Passenger Passenger { get; set; }
     public int DestinationID { get; set; }
     public Destination Destination { get; set; }
 }

@@ -16,22 +16,28 @@
                         </div>
                         <div class="card-body">
                             <form method="post" role="form text-left" id="ResForm">
-                                <div class="mb-3" id="departure">
-                                    <select asp-for="Departure" class="form-control mb-2">
-                                        <option value="">Kalkış noktası seçin</option> <!-- İlk değer -->
-                                        @foreach (var item in ViewBag.v as IEnumerable<SelectListItem>)
-                                        {
-                                            <option value="@item.Value">@item.Text</option>
-                                        }
+                                <div class="form-group">
+                                    <label>Kalkış Noktası ?</label>
+                                    <select class="form-control form-control-s" asp-for="Departure" id="departure">
+                                        <option value="0">İstanbul</option>
+                                        <option value="1">Ankara</option>
+                                        <option value="2">İzmir</option>
+                                        <option value="3">Antalya</option>
+                                        <option value="4">Bursa</option>
+                                        <option value="5">Adana</option>
+                                        <option value="6">Eskisehir</option>
                                     </select>
                                 </div>
-                                <div class="mb-3" id="arrive">
-                                    <select asp-for="Arrive" class="form-control mb-2">
-                                        <option value="">Varış noktası seçin</option> <!-- İlk değer -->
-                                        @foreach (var item in ViewBag.v2 as IEnumerable<SelectListItem>)
-                                        {
-                                            <option value="@item.Value">@item.Text</option>
-                                        }
+                                <div class="form-group">
+                                    <label>Varış Noktası ?</label>
+                                    <select class="form-control form-control-s" asp-for="Arrive" id="arrive">
+                                        <option value="0">İstanbul</option>
+                                        <option value="1">Ankara</option>
+                                        <option value="2">İzmir</option>
+                                        <option value="3">Antalya</option>
+                                        <option value="4">Bursa</option>
+                                        <option value="5">Adana</option>
+                                        <option value="6">Eskisehir</option>
                                     </select>
                                 </div>
 
@@ -68,7 +74,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.querySelector("#arrive")
-</script>

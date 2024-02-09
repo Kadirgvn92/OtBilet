@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using OtBilet.BusinessLayer.Abstract;
 using OtBilet.DTOLayer.DestinationDTO;
 using OtBilet.EntityLayer;
@@ -28,6 +29,7 @@ public class DashboardController : Controller
     [HttpPost]
     public IActionResult SearchDestination(SearchDestinationDTO destinationDTO)
     {
+
         if (destinationDTO.Departure.ToString() == destinationDTO.Arrive.ToString())
         {
             ModelState.AddModelError("", "Kalkış Noktası ile Varış Noktası aynı yer seçilemez.Lütfen tekrar deneyin.");
