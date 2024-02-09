@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OtBilet.DAL.Abstract;
-public interface ITicketDal : IGenericDal<Ticket>
+namespace OtBilet.DTOLayer.SeatDTO;
+public class SeatNumberDTO
 {
-    public Ticket GetTicketByDestinationID(int id);
-
+    public int SeatNumber { get; set; }
 }

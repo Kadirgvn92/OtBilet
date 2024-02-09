@@ -1,5 +1,4 @@
-﻿
-@model CreateDestinationDTO
+﻿@model CreateDestinationDTO
 
 @{
     ViewData["Title"] = "CreateDestination";
@@ -17,17 +16,30 @@
                         </div>
                         <div class="card-body">
                             <form method="post" role="form text-left" id="ResForm">
+                                <div class="mb-3" id="departure">
+                                    <select asp-for="Departure" class="form-control mb-2">
+                                        <option value="">Kalkış noktası seçin</option> <!-- İlk değer -->
+                                        @foreach (var item in ViewBag.v as IEnumerable<SelectListItem>)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="mb-3" id="arrive">
+                                    <select asp-for="Arrive" class="form-control mb-2">
+                                        <option value="">Varış noktası seçin</option> <!-- İlk değer -->
+                                        @foreach (var item in ViewBag.v2 as IEnumerable<SelectListItem>)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                </div>
+
                                 <div class="mb-3">
-                                    @Html.DropDownListFor(x => x.Departure, ViewBag.v as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                                    <input type="time" required asp-for="DepartureHour" class="form-control mb-2" placeholder="Saat">
                                 </div>
                                 <div class="mb-3">
-                                    @Html.DropDownListFor(x => x.Arrive, ViewBag.v2 as IEnumerable<SelectListItem>, new { @class = "form-control" })
-                                </div>
-                                <div class="mb-3">
-                                    <input type="time" required asp-for="DepartureHour" class="form-control mb-2" placeholder="Saat" >
-                                </div>
-                                <div class="mb-3">
-                                    <input type="date" required asp-for="DepatureDate" class="form-control mb-2" placeholder="Tarih" >
+                                    <input type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" required asp-for="DepatureDate" class="form-control mb-2" placeholder="Tarih">
                                 </div>
                                 <div class="mb-3">
                                     <input type="text" required asp-for="Price" class="form-control mb-2" placeholder="Fiyat">
@@ -48,7 +60,7 @@
                                     <button type="submit" class="btn bg-success w-100 my-4 mb-2">Rezervasyon Oluştur</button>
                                 </div>
                             </form>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -56,3 +68,7 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.querySelector("#arrive")
+</script>

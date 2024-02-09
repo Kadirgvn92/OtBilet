@@ -23,4 +23,10 @@ public class EfDestinationDal : GenericRepository<Destination>, IDestinationDal
         var values = context.Destinations.Where(x => x.Arrive == destination.Arrive && x.Departure == destination.Departure && x.DepatureDate == destination.DepatureDate).Include(y => y.Bus).ToList();
         return values;
     }
+    public Destination GetDestinationByID(int id)
+    {
+        using var context = new OtBiletDbContext();
+        var destination = context.Destinations.Where(x => x.DestinationID == id).FirstOrDefault();
+        return destination;
+    }
 }

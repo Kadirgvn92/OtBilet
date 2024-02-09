@@ -18,7 +18,12 @@ public class DestinationManager : IDestinationService
 		_destinationDal = destinationDal;
 	}
 
-	public void TAdd(Destination entity)
+    public Destination GetDestinationByID(int id)
+    {
+       return _destinationDal.GetDestinationByID(id);
+    }
+
+    public void TAdd(Destination entity)
 	{
 		_destinationDal.Add(entity);
 	}

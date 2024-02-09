@@ -7,15 +7,30 @@ namespace OtBilet.PresentationLayer.Controllers;
 public class TicketController : Controller
 {
     private readonly ITicketService _ticketService;
-
-    public TicketController(ITicketService ticketService)
+    private readonly IDestinationService _destinationService;
+    public TicketController(ITicketService ticketService, IDestinationService destinationService)
     {
+        _destinationService = destinationService;
         _ticketService = ticketService;
     }
+
     public IActionResult Index(int id)
     {
-        var values = _ticketService.TCreateTicketByDestinationID(id);
+
+        var destination = _destinationService.GetDestinationByID(id);
+        int seatNumber = Convert.ToInt32(Request.Query["seatNumber"]);
+
+
+        _ticketService.TAdd(new Ticket()
+        {
+            DestinationID = destination.DestinationID,
+            SeatNumber = seatNumber,
+            PNR = PNRGenerator.GeneratePNR()
+        });
+        var values = _ticketService.GetTicketByDestinationID(id);
+
         return View(values);
+
     }
     //[HttpPost]
     //public IActionResult Index(CreateTicketDTO dto)
@@ -25,7 +40,7 @@ public class TicketController : Controller
     //        DestinationID = dto.DestinationID,
     //        SeatID = dto.SeatID,
     //        PNR = PNRGenerator.GeneratePNR(),
-            
+
     //    };
 
     //    _ticketService.TAdd(ticket);

@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation.AspNetCore;
+using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using OtBilet.BusinessLayer.Abstract;
 using OtBilet.BusinessLayer.Concrete;
 using OtBilet.DAL.Abstract;
@@ -8,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OtBilet.DTOLayer.SeatDTO;
+using OtBilet.BusinessLayer.ValidationRules;
 
 namespace OtBilet.BusinessLayer.Container;
 public static class Extension
@@ -29,6 +33,13 @@ public static class Extension
 
         services.AddScoped<IBusService, BusManager>();
         services.AddScoped<IBusDal, EfBusDal>();
+
+        services.AddFluentValidationAutoValidation(config =>
+        {
+            config.DisableDataAnnotationsValidation = true;
+        });
+
+        services.AddValidatorsFromAssemblyContaining<TicketValidator>();
 
     }
 }

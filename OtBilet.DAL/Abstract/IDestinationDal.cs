@@ -10,4 +10,6 @@ namespace OtBilet.DAL.Abstract;
 public interface IDestinationDal : IGenericDal<Destination>
 {
     public List<Destination> GetDestinationsByFilter(SearchDestinationDTO destination);
+    public Destination GetDestinationByID(int id);
+
 }

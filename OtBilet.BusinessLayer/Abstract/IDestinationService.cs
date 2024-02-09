@@ -10,4 +10,5 @@ namespace OtBilet.BusinessLayer.Abstract;
 public interface IDestinationService : IGenericService<Destination>
 {
     public List<Destination> TGetDestinationsByFilter(SearchDestinationDTO destination);
+    public Destination GetDestinationByID(int id);
 }

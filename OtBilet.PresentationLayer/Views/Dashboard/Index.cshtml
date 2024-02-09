@@ -79,11 +79,12 @@
                                             <td colspan="4" class="text-center  ">
                                                 <img src="/AdminLTE-3.2.0/dist/img/bus.png" width="800px" height="300px" />
                                                 &emsp;
+
                                                 <label>Koltuk No Seçin</label>
                                                 &emsp;
-                                                <input type="number" min="1" max="38" placeholder="No" />
+                                                <input id="seatNumberInput" required type="number" min="1" max="38" placeholder="No" />
                                                 &emsp;
-                                                <a href="/Ticket/Index/@item.DestinationID" class="btn btn-success">Onayla ve Devam Et</a>
+                                                <a id="continueButton" href="/Ticket/Index/@item.DestinationID" class="btn btn-success">Onayla ve Devam Et</a>
                                             </td>
 
                                         </tr>
@@ -116,5 +117,27 @@
             // Bu satırın altındaki expandable-body'yi aç veya kapat
             expandableBody.toggle();
         });
+
+        $(document).ready(function () {
+            // "Onayla ve Devam Et" butonuna tıklama olayını izle
+            $('#continueButton').click(function (e) {
+                e.preventDefault(); // Sayfanın yeniden yüklenmesini önle
+
+                // Koltuk numarasını al
+                var seatNumber = $('#seatNumberInput').val();
+
+                if (seatNumber == "") {
+                    e.preventDefault(); // Sayfanın yeniden yüklenmesini önle
+                    alert('Lütfen bir koltuk numarası girin.'); // Kullanıcıya uyarı göster
+                } else {
+                    var destinationId = $(this).attr('href');
+                    var url = destinationId + '?seatNumber=' + seatNumber;
+                    window.location.href = url;
+                }
+                // Koltuk numarasını Ticket/Index sayfasına yönlendirirken parametre olarak ekle
+               
+            });
+        });
+
     });
 </script>

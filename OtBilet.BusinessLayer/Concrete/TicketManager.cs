@@ -17,11 +17,6 @@ public class TicketManager : ITicketService
 		_ticketDal = ticketDal;
 	}
 
-    public Ticket TCreateTicketByDestinationID(int id)
-    {
-		return _ticketDal.CreateTicketByDestinationID(id);
-    }
-
     public void TAdd(Ticket entity)
 	{
 		_ticketDal.Add(entity);
@@ -46,4 +41,9 @@ public class TicketManager : ITicketService
 	{
 		_ticketDal.Update(entity);
 	}
+
+    public Ticket GetTicketByDestinationID(int id)
+    {
+		return _ticketDal.GetTicketByDestinationID(id);
+    }
 }
