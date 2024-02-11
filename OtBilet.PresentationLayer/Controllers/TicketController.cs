@@ -10,27 +10,28 @@ public class TicketController : Controller
     private readonly ITicketService _ticketService;
     private readonly IDestinationService _destinationService;
     private readonly IPassengerService _passengerService;
-    public TicketController(ITicketService ticketService, IDestinationService destinationService, IPassengerService passengerService)
+    private readonly ISeatService _seatService;
+    public TicketController(ITicketService ticketService, IDestinationService destinationService, IPassengerService passengerService, ISeatService seatService)
     {
         _destinationService = destinationService;
         _ticketService = ticketService;
         _passengerService = passengerService;
+        _seatService = seatService;
     }
     public IActionResult Index(int id)
     {
 
         var destination = _destinationService.GetDestinationByID(id);
-        var seatNumber = Convert.ToInt32(Request.Query["seatNumber"]);
         var PNR = PNRGenerator.GeneratePNR();
         var passenger = _passengerService.TGetByID(1);
+        var seats = _seatService.TGetSeatsByBusID(destination.BusID);
         
         ViewBag.Destination = destination;
-        ViewBag.SeatNumber = seatNumber;
         ViewBag.PNR = PNR;
         ViewBag.Passenger = passenger;
         ViewBag.Firm = destination.Bus;
 
-        return View();
+        return View(seats);
 
     }
     public IActionResult CreateTicket(int id, int seatNumber)

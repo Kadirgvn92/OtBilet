@@ -37,7 +37,12 @@ public class SeatManager : ISeatService
 		return _seatDal.GetByID(id);
 	}
 
-	public void TUpdate(Seat entity)
+    public List<Seat> TGetSeatsByBusID(int busID)
+    {
+		return _seatDal.GetSeatsByBusID(busID);
+    }
+
+    public void TUpdate(Seat entity)
 	{
 		_seatDal.Update	(entity);
 	}

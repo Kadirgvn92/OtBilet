@@ -14,4 +14,10 @@ public class EfSeatDal : GenericRepository<Seat>, ISeatDal
 	public EfSeatDal(OtBiletDbContext db) : base(db)
 	{
 	}
+	public List<Seat> GetSeatsByBusID(int busID)
+	{
+		using var context = new OtBiletDbContext();
+		var values = context.Seats.Where(x => x.BusID == busID).ToList();
+		return values;
+	}
 }

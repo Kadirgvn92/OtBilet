@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OtBilet.DTOLayer.SeatDTO;
 using OtBilet.BusinessLayer.ValidationRules;
+using OtBilet.EntityLayer;
 
 namespace OtBilet.BusinessLayer.Container;
 public static class Extension
@@ -33,6 +34,9 @@ public static class Extension
 
         services.AddScoped<IBusService, BusManager>();
         services.AddScoped<IBusDal, EfBusDal>();
+
+        services.AddScoped<ISeatService, SeatManager>();    
+        services.AddScoped<ISeatDal, EfSeatDal>();
 
         services.AddFluentValidationAutoValidation(config =>
         {

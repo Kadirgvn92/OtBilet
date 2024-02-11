@@ -1,7 +1,16 @@
 ﻿
 
-@model SeatNumberDTO
+@model List<Seat>
 
-<label>Koltuk No Seçin</label>
-&emsp;
-<input type="number" asp-for="SeatNumber" min="1" max="38" placeholder="No" />
+<div class="form-group">
+    <select class="form-control" id="seatNumberInput" required>
+        <option value="">Koltuk Seçin</option>
+        @foreach (var seatNumber in Model)
+        {
+            if (seatNumber.IsAvailable)
+            {
+                <option value="@seatNumber.SeatNumber">@seatNumber.SeatNumber</option>
+            }
+        }
+    </select>
+</div>

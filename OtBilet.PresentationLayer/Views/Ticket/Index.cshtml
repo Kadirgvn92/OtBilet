@@ -1,4 +1,4 @@
-﻿@model Ticket
+﻿@model List<Seat>
 
 @{
     ViewData["Title"] = "Index";
@@ -36,7 +36,7 @@
                                 <tr>
                                     <td>@ViewBag.Destination.DepatureDate.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR")) @ViewBag.Destination.DepartureHour.ToString(@"hh\:mm")</td>
                                     <td>
-                                        <div class="seats"> @ViewBag.SeatNumber  </div>
+                                        @ViewBag.SeatNumber
                                     </td>
                                 </tr>
 
@@ -53,6 +53,12 @@
                                         Seferin 6 saat öncesine kadar biletinizi iptal edebilir ve değiştirebilirsiniz.
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <img src="/AdminLTE-3.2.0/dist/img/bus.png" width="400px" />
+                                    </td>
+                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>

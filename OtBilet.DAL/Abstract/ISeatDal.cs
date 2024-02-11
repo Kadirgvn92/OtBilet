@@ -8,4 +8,5 @@ using System.Threading.Tasks;
 namespace OtBilet.DAL.Abstract;
 public interface ISeatDal : IGenericDal<Seat>
 {
+    public List<Seat> GetSeatsByBusID(int busID);
 }

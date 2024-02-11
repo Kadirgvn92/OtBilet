@@ -78,11 +78,14 @@
                                         <tr class="expandable-body">
                                             <td colspan="4" class="text-center">
                                                 <img src="/AdminLTE-3.2.0/dist/img/bus.png" width="800px" height="300px" />
-                                                &emsp;
+                                                @* &emsp;
                                                 <label>Koltuk No Seçin</label>
                                                 &emsp;
-                                                <input id="seatNumberInput" required type="number" min="1" max="38" placeholder="No" />
-                                                &emsp;
+                                                <input id="seatNumberInput_@item.DestinationID" required type="number" min="1" max="38" placeholder="No" />
+                                                &emsp; *@
+
+                                                @await Component.InvokeAsync("_TicketSeatNumberPartial", new { id = item.DestinationID})
+
                                                 <a id="continueButton" href="/Ticket/Index/@item.DestinationID" class="btn btn-success">Onayla ve Devam Et</a>
                                             </td>
 
@@ -102,6 +105,7 @@
 
 <script>
     $(document).ready(function () {
+
         $('.expandable-body').hide();
 
         $('tr[data-widget="expandable-table"]').click(function () {
@@ -112,23 +116,6 @@
             expandableBody.toggle();
         });
 
-        $(document).ready(function () {
-            $('#continueButton').click(function (e) {
-                e.preventDefault(); 
-
-                var seatNumber = $('#seatNumberInput').val();
-
-                if (seatNumber == "") {
-                    e.preventDefault(); // Sayfanın yeniden yüklenmesini önle
-                    alert('Lütfen bir koltuk numarası girin.'); // Kullanıcıya uyarı göster
-                } else {
-                    var destinationId = $(this).attr('href');
-                    var url = destinationId + '?seatNumber=' + seatNumber;
-                    window.location.href = url;
-                }
-               
-            });
-        });
 
     });
 </script>
