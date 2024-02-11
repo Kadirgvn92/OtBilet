@@ -32,11 +32,13 @@
                                 </h4>
                             </div>
                         </div>
+                        <hr />
                         <div class="row invoice-info">
                             <div class="col-sm-6 invoice-col">
 
                                 <address>
                                     <strong> @ViewBag.Passenger.Name @ViewBag.Passenger.Surname</strong><br>
+                                    <br />
                                     TC Kimlik No : @ViewBag.Passenger.NationalCardNo<br>
                                     Mail Adresi : @ViewBag.Passenger.Mail<br>
                                     Telefon : @ViewBag.Passenger.PhoneNumber<br>
@@ -76,20 +78,11 @@
                         <div class="row">
                             <!-- accepted payments column -->
                             <div class="col-6">
-                                <p class="lead">Ödeme Yöntemi :</p>
+                                <p class="lead">Ödeme Yöntemi : Kredi Kartı</p>
                                 <img src="/AdminLTE-3.2.0/dist/img/credit/visa.png" alt="Visa">
                                 <img src="/AdminLTE-3.2.0/dist/img/credit/mastercard.png" alt="Mastercard">
                                 <img src="/AdminLTE-3.2.0/dist/img/credit/american-express.png" alt="American Express">
                                 <img src="/AdminLTE-3.2.0/dist/img/credit/paypal2.png" alt="Paypal">
-
-                                <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                    <div class="installment-toggle"> 
-                                        <p id="installment-toggle" type="button"> 
-                                            <span class="fas fa-credit-card"></span>
-                                            <span>Taksit seçenekleri</span> kart bilgilerinin ilk 8 hanesi girildikten sonra gösterilecektir. 
-                                        </p>
-                                    </div>
-                                </p>
                             </div>
                             <!-- /.col -->
                             <div class="col-6">
@@ -97,9 +90,9 @@
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tr>
-                                            <th style="width:46%"> </th>
+                                            <th style="width:56%"> </th>
                                             <th>Toplam</th>
-                                            <td style="width:220px">@ViewBag.Price.ToString("N0") TL</td>
+                                            <td style="width:185px">@ViewBag.Price.ToString("N0") TL</td>
                                         </tr>
                                         <tr>
                                             <th > </th>
@@ -122,9 +115,6 @@
                             <div class="col-12">
                                 <button type="button" class="btn btn-success float-right">
                                     <i class="far fa-envelope"></i> Mail Adresine Gönder
-                                </button>
-                                <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                    <i class="fas fa-print"></i> Çıktı Al
                                 </button>
                             </div>
                         </div>

@@ -19,25 +19,19 @@
                                 <div class="form-group">
                                     <label>Kalkış Noktası ?</label>
                                     <select class="form-control form-control-s" asp-for="Departure" id="departure">
-                                        <option value="0">İstanbul</option>
-                                        <option value="1">Ankara</option>
-                                        <option value="2">İzmir</option>
-                                        <option value="3">Antalya</option>
-                                        <option value="4">Bursa</option>
-                                        <option value="5">Adana</option>
-                                        <option value="6">Eskisehir</option>
+                                        @foreach (var option in ViewBag.Departure as List<SelectListItem>)
+                                        {
+                                            <option value="@option.Value">@option.Text</option>
+                                        }
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Varış Noktası ?</label>
                                     <select class="form-control form-control-s" asp-for="Arrive" id="arrive">
-                                        <option value="0">İstanbul</option>
-                                        <option value="1">Ankara</option>
-                                        <option value="2">İzmir</option>
-                                        <option value="3">Antalya</option>
-                                        <option value="4">Bursa</option>
-                                        <option value="5">Adana</option>
-                                        <option value="6">Eskisehir</option>
+                                        @foreach (var option in ViewBag.Arrive as List<SelectListItem>)
+                                        {
+                                            <option value="@option.Value">@option.Text</option>
+                                        }
                                     </select>
                                 </div>
 
@@ -74,3 +68,36 @@
         </div>
     </div>
 </div>
+
+<script>
+
+    document.getElementById("departure").value = "0";
+    document.getElementById("arrive").value = "2";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var firstDropdown = document.getElementById("departure");
+        var secondDropdown = document.getElementById("arrive");
+
+        secondDropdown.addEventListener("change", function () {
+            if (firstDropdown.value === secondDropdown.value) {
+                secondDropdown.value = findDifferentValue(secondDropdown, firstDropdown.value);
+            }
+        });
+
+        firstDropdown.addEventListener("change", function () {
+            if (secondDropdown.value === firstDropdown.value) {
+                secondDropdown.value = findDifferentValue(firstDropdown, secondDropdown.value);
+            }
+        });
+
+        function findDifferentValue(selectElement, valueToExclude) {
+            var options = selectElement.options;
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].value !== valueToExclude) {
+                    return options[i].value;
+                }
+            }
+            return null;
+        }
+    });
+</script>

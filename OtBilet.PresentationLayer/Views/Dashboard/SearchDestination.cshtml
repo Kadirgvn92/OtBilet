@@ -1,4 +1,6 @@
-﻿@model SearchDestinationDTO
+﻿
+
+@model SearchDestinationDTO
 
 @{
     ViewData["Title"] = "SearchDestination";
@@ -25,32 +27,25 @@
                     <hr class="horizontal gray-light my-0">
                     <form method="post" >
                         <div class="form-group">
-                            <label>Nereden ?</label>
+                            <label>Kalkış Noktası ?</label>
                             <select class="form-control form-control-s" asp-for="Departure" id="departure">
-                                <option value="0">İstanbul</option>
-                                <option value="1">Ankara</option>
-                                <option value="2">İzmir</option>
-                                <option value="3">Antalya</option>
-                                <option value="4">Bursa</option>
-                                <option value="5">Adana</option>
-                                <option value="6">Eskisehir</option>
+                                @foreach (var option in ViewBag.Departure as List<SelectListItem>)
+                                {
+                                    <option value="@option.Value">@option.Text</option>
+                                }
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Nereye ?</label>
+                            <label>Varış Noktası ?</label>
                             <select class="form-control form-control-s" asp-for="Arrive" id="arrive">
-                                <option value="0">İstanbul</option>
-                                <option value="1">Ankara</option>
-                                <option value="2">İzmir</option>
-                                <option value="3">Antalya</option>
-                                <option value="4">Bursa</option>
-                                <option value="5">Adana</option>
-                                <option value="6">Eskisehir</option>
+                                @foreach (var option in ViewBag.Arrive as List<SelectListItem>)
+                                {
+                                    <option value="@option.Value">@option.Text</option>
+                                }
                             </select>
                         </div>
                         <label>Tarih</label>
                         <div class="form-group d-flex justify-content-between">
-                            
                             <input type="date" id="date" class="form-control form-control-s" asp-for="DepatureDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="@DateTime.Now.AddDays(30).ToString("yyyy-MM-dd")" placeholder="Tarihi seçin">
                             &nbsp;
                             <a href="#" class="btn btn-info" onclick="setToday()">Bugün</a>
@@ -89,15 +84,25 @@
 
         secondDropdown.addEventListener("change", function () {
             if (firstDropdown.value === secondDropdown.value) {
-                firstDropdown.value = 0;
+                secondDropdown.value = findDifferentValue(secondDropdown, firstDropdown.value);
             }
-            
         });
+
         firstDropdown.addEventListener("change", function () {
             if (secondDropdown.value === firstDropdown.value) {
-                secondDropdown.value = 0;
+                secondDropdown.value = findDifferentValue(firstDropdown, secondDropdown.value);
             }
         });
+
+        function findDifferentValue(selectElement, valueToExclude) {
+            var options = selectElement.options;
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].value !== valueToExclude) {
+                    return options[i].value;
+                }
+            }
+            return null;
+        }
     });
 
 

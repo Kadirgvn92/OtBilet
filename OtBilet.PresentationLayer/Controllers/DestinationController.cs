@@ -21,24 +21,27 @@ public class DestinationController : Controller
     [HttpGet]
     public IActionResult CreateDestination()
     {
-         var values = Enum.GetValues(typeof(Departure))
-                              .Cast<Departure>()
-                              .Select(x => new SelectListItem
-                              {
-                                  Text = x.ToString(),
-                                  Value = ((int)x).ToString()
-                              })
-                              .ToList();
-        var values2 = Enum.GetValues(typeof(Arrive))
-                           .Cast<Arrive>()
-                           .Select(x => new SelectListItem
-                           {
-                               Text = x.ToString(),
-                               Value = ((int)x).ToString()
-                           })
-                           .ToList();
-        ViewBag.v = values;
-        ViewBag.v2 = values2;
+        var departure = Enum.GetValues(typeof(Departure))
+                               .Cast<Departure>()
+                               .Select(x => new SelectListItem
+                               {
+                                   Text = x.ToString(),
+                                   Value = ((int)x).ToString()
+                               })
+                               .ToList();
+
+        var arrive = Enum.GetValues(typeof(Arrive))
+                                .Cast<Arrive>()
+                                .Select(x => new SelectListItem
+                                {
+                                    Text = x.ToString(),
+                                    Value = ((int)x).ToString()
+                                })
+                                .ToList();
+
+        ViewBag.Departure = departure;
+        ViewBag.Arrive = arrive;
+
         return View();
     }
     [HttpPost]

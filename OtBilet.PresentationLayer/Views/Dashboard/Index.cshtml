@@ -75,11 +75,10 @@
                                                 <a href="#" class="btn btn-primary ">Seç</a>
                                             </td>
                                         </tr>
-                                        <tr class="expandable-body ">
-                                            <td colspan="4" class="text-center  ">
+                                        <tr class="expandable-body">
+                                            <td colspan="4" class="text-center">
                                                 <img src="/AdminLTE-3.2.0/dist/img/bus.png" width="800px" height="300px" />
                                                 &emsp;
-
                                                 <label>Koltuk No Seçin</label>
                                                 &emsp;
                                                 <input id="seatNumberInput" required type="number" min="1" max="38" placeholder="No" />
@@ -103,27 +102,20 @@
 
 <script>
     $(document).ready(function () {
-        // Tüm satırın expandable-body'sini gizle
         $('.expandable-body').hide();
 
-        // Tıklama olayını izle
         $('tr[data-widget="expandable-table"]').click(function () {
-            // Tıklandığında, bu satırın altındaki expandable-body'yi bul
             var expandableBody = $(this).next('.expandable-body');
 
-            // Tüm diğer expandable-body'leri gizle
             $('.expandable-body').not(expandableBody).hide();
 
-            // Bu satırın altındaki expandable-body'yi aç veya kapat
             expandableBody.toggle();
         });
 
         $(document).ready(function () {
-            // "Onayla ve Devam Et" butonuna tıklama olayını izle
             $('#continueButton').click(function (e) {
-                e.preventDefault(); // Sayfanın yeniden yüklenmesini önle
+                e.preventDefault(); 
 
-                // Koltuk numarasını al
                 var seatNumber = $('#seatNumberInput').val();
 
                 if (seatNumber == "") {
@@ -134,7 +126,6 @@
                     var url = destinationId + '?seatNumber=' + seatNumber;
                     window.location.href = url;
                 }
-                // Koltuk numarasını Ticket/Index sayfasına yönlendirirken parametre olarak ekle
                
             });
         });

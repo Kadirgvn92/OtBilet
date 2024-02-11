@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Mvc;
 using OtBilet.BusinessLayer.Abstract;
 using OtBilet.DTOLayer.TicketDTO;
 using OtBilet.EntityLayer;
@@ -32,12 +33,20 @@ public class TicketController : Controller
         return View();
 
     }
-    [HttpGet]
     public IActionResult CreateTicket(int id, int seatNumber)
     {
+
         var destination = _destinationService.GetDestinationByID(id);
         var PNR = PNRGenerator.GeneratePNR();
         var passenger = _passengerService.TGetByID(1);
+
+        _ticketService.TAdd(new Ticket()
+        {
+            DestinationID = destination.DestinationID,
+            SeatNumber = seatNumber,
+            PassengerID = 1,
+            PNR = PNR
+        });
 
         ViewBag.Destination = destination;
         ViewBag.PNR = PNR;
@@ -47,20 +56,7 @@ public class TicketController : Controller
         ViewBag.KDV = (destination.Price * 18) / 100;
         ViewBag.Firm = destination.Bus;
 
+
         return View();
-    }
-    [HttpPost]
-    public IActionResult CreateTicket(CreateTicketDTO dto)
-    {
-
-        _ticketService.TAdd(new Ticket()
-        {
-            DestinationID = dto.DestinationID,
-            SeatNumber = dto.SeatNumber,
-            PassengerID = 1,
-            PNR = PNRGenerator.GeneratePNR()
-        });
-
-        return RedirectToAction("Invoice", "Ticket");
     }
 }

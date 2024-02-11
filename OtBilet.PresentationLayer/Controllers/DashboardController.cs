@@ -23,6 +23,27 @@ public class DashboardController : Controller
     [HttpGet]
     public IActionResult SearchDestination()
     {
+
+        var departure = Enum.GetValues(typeof(Departure))
+                               .Cast<Departure>()
+                               .Select(x => new SelectListItem
+                               {
+                                   Text = x.ToString(),
+                                   Value = ((int)x).ToString()
+                               })
+                               .ToList();
+
+        var arrive = Enum.GetValues(typeof(Arrive))
+                                .Cast<Arrive>()
+                                .Select(x => new SelectListItem
+                                {
+                                    Text = x.ToString(),
+                                    Value = ((int)x).ToString()
+                                })
+                                .ToList();
+
+        ViewBag.Departure = departure;
+        ViewBag.Arrive = arrive;
         return View(); 
     }
 
