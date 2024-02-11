@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "CreateTicket";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
 }
 
 <div class="content-wrapper">
@@ -26,38 +27,23 @@
                         <div class="row">
                             <div class="col-12">
                                 <h4>
-                                    <i class="fas fa-globe"></i> OtBilet
-                                    <small class="float-right">Date: @DateTime.Now.ToShortDateString()</small>
+                                    <img src="/AdminLTE-3.2.0/dist/img/OtBilet.png" width="80px" height="80px" alt="Metro Turizm"> OtBilet
+                                    <small class="float-right">Tarih : @DateTime.Now.ToShortDateString()</small>
                                 </h4>
                             </div>
-                            <!-- /.col -->
                         </div>
-                        <!-- info row -->
                         <div class="row invoice-info">
-                            <div class="col-sm-4 invoice-col">
+                            <div class="col-sm-6 invoice-col">
 
                                 <address>
-                                    <strong>OtBilet</strong><br>
-                                    Suadiye Ozan İş Hanı<br>
-                                    Küçükçekmece / İSTANBUL<br>
-                                    Phone: (212) 123-5432<br>
-                                    Email: info@otbilet.com
-                                </address>
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-4 invoice-col">
-                                <input type="hidden" asp-for="PassengerID" value="@ViewBag.Passenger"></input>
-                                <address>
                                     <strong> @ViewBag.Passenger.Name @ViewBag.Passenger.Surname</strong><br>
-                                    Email: @ViewBag.Passenger.Mail<br>
-                                    Phone: @ViewBag.Passenger.PhoneNumber<br>
+                                    TC Kimlik No : @ViewBag.Passenger.NationalCardNo<br>
+                                    Mail Adresi : @ViewBag.Passenger.Mail<br>
+                                    Telefon : @ViewBag.Passenger.PhoneNumber<br>
                                 </address>
                             </div>
-                            <!-- /.col -->
-                            <!-- /.col -->
+                           
                         </div>
-                        <!-- /.row -->
-                        <!-- Table row -->
                         <div class="row">
                             <div class="col-12 table-responsive">
                                 <table class="table table-striped">
@@ -65,6 +51,7 @@
                                         <tr>
                                             <th>Kalkış Noktası</th>
                                             <th>Varış Noktası</th>
+                                            <th>Koltuk No</th>
                                             <th>Tarih</th>
                                             <th>Saat</th>
                                             <th>Fiyat</th>
@@ -74,9 +61,10 @@
                                         <tr>
                                             <td>@ViewBag.Destination.Departure</td>
                                             <td>@ViewBag.Destination.Arrive</td>
+                                            <td>@ViewBag.SeatNumber</td>
                                             <td>@ViewBag.Destination.DepatureDate.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR"))</td>
                                             <td>@ViewBag.Destination.DepartureHour.ToString(@"hh\:mm")</td>
-                                            <td>@ViewBag.Destination.Price.ToString("N0")</td>
+                                            <td>@ViewBag.Destination.Price.ToString("N0") TL</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -88,14 +76,19 @@
                         <div class="row">
                             <!-- accepted payments column -->
                             <div class="col-6">
-                                <p class="lead">Payment Methods:</p>
+                                <p class="lead">Ödeme Yöntemi :</p>
                                 <img src="/AdminLTE-3.2.0/dist/img/credit/visa.png" alt="Visa">
                                 <img src="/AdminLTE-3.2.0/dist/img/credit/mastercard.png" alt="Mastercard">
                                 <img src="/AdminLTE-3.2.0/dist/img/credit/american-express.png" alt="American Express">
                                 <img src="/AdminLTE-3.2.0/dist/img/credit/paypal2.png" alt="Paypal">
 
                                 <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                    <div class="text" id="subscription-optin-text"> Ön Bilgilendirme Formu'nu , Mesafeli Satış Sözleşmesi'ni okudum ve onaylıyorum. Kişisel verilerin işlenmesine ilişkin Aydınlatma Metni’ni ve Çerez Politikası Metni'ni okudum. Kullanım Koşulları’nı . <a id="kvkk-confirmation-modal-opener" href="javascript:void(0)"><strong>kabul ediyorum</strong></a>. </div>
+                                    <div class="installment-toggle"> 
+                                        <p id="installment-toggle" type="button"> 
+                                            <span class="fas fa-credit-card"></span>
+                                            <span>Taksit seçenekleri</span> kart bilgilerinin ilk 8 hanesi girildikten sonra gösterilecektir. 
+                                        </p>
+                                    </div>
                                 </p>
                             </div>
                             <!-- /.col -->
@@ -104,28 +97,34 @@
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tr>
-                                            <th style="width:50%">Toplam:</th>
-                                            <td>@ViewBag.Destination.Price.ToString("N0")</td>
+                                            <th style="width:46%"> </th>
+                                            <th>Toplam</th>
+                                            <td style="width:220px">@ViewBag.Price.ToString("N0") TL</td>
                                         </tr>
                                         <tr>
-                                            <th>Toplam:</th>
-                                            <td>@ViewBag.Destination.Price.ToString("N0")</td>
+                                            <th > </th>
+                                            <th>KDV</th>
+                                            <td>@ViewBag.KDV.ToString("N0") TL</td>
+                                        </tr>
+                                        <tr>
+                                            <th> </th>
+                                            <th>Toplam :</th>
+                                            <td>@ViewBag.Destination.Price.ToString("N0") TL</td>
                                         </tr>
                                     </table>
                                 </div>
+                                
                             </div>
                             <!-- /.col -->
                         </div>
-                        <!-- /.row -->
-                        <!-- this row will not appear when printing -->
                         <div class="row no-print">
+                           
                             <div class="col-12">
                                 <button type="button" class="btn btn-success float-right">
-                                    <i class="far fa-credit-card"></i> Vazgeç
-                                    Payment
+                                    <i class="far fa-envelope"></i> Mail Adresine Gönder
                                 </button>
                                 <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                    <i class="fas fa-download"></i> Bileti Oluştur
+                                    <i class="fas fa-print"></i> Çıktı Al
                                 </button>
                             </div>
                         </div>

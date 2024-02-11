@@ -1,5 +1,4 @@
-﻿
-@model Ticket
+﻿@model Ticket
 
 @{
     ViewData["Title"] = "Index";
@@ -40,7 +39,7 @@
                                         <div class="seats"> @ViewBag.SeatNumber  </div>
                                     </td>
                                 </tr>
-                                
+
                                 <tr>
                                     <td>
                                         <hr />
@@ -141,7 +140,7 @@
                         <div class="col-12">
                             <div class="d-flex flex-column">
                                 <p class="text mb-1">Kart Sahibi Ad Soyad Name</p>
-                                <input class="form-control mb-3" type="text" placeholder="Ad Soyad" >
+                                <input class="form-control mb-3" type="text" placeholder="Ad Soyad">
                             </div>
                         </div>
                         <div class="col-12">
@@ -163,13 +162,13 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <a href="/Ticket/CreateTicket/@ViewBag.Destination.DestinationID">
+                            <a href="@Url.Action("CreateTicket", "Ticket", new { id = ViewBag.Destination.DestinationID, seatNumber = ViewBag.SeatNumber })" id="continueButton">
                                 <div class="btn btn-primary btn-block mb-3">
                                     <span class="ps-3 text-lg text-light">Ödemeyi Tamamla</span>
                                     <span class="fas fa-arrow-right"></span>
                                 </div>
                             </a>
-                          
+
                         </div>
                     </div>
                 </div>

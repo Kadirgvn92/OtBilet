@@ -15,12 +15,11 @@ public class TicketController : Controller
         _ticketService = ticketService;
         _passengerService = passengerService;
     }
-    [HttpGet]
     public IActionResult Index(int id)
     {
 
         var destination = _destinationService.GetDestinationByID(id);
-        int seatNumber = Convert.ToInt32(Request.Query["seatNumber"]);
+        var seatNumber = Convert.ToInt32(Request.Query["seatNumber"]);
         var PNR = PNRGenerator.GeneratePNR();
         var passenger = _passengerService.TGetByID(1);
         
@@ -34,17 +33,18 @@ public class TicketController : Controller
 
     }
     [HttpGet]
-    public IActionResult CreateTicket(int id)
+    public IActionResult CreateTicket(int id, int seatNumber)
     {
         var destination = _destinationService.GetDestinationByID(id);
-        int seatNumber = Convert.ToInt32(Request.Query["seatNumber"]);
         var PNR = PNRGenerator.GeneratePNR();
         var passenger = _passengerService.TGetByID(1);
 
         ViewBag.Destination = destination;
-        ViewBag.SeatNumber = seatNumber;
         ViewBag.PNR = PNR;
+        ViewBag.SeatNumber = seatNumber.ToString(); 
         ViewBag.Passenger = passenger;
+        ViewBag.Price = destination.Price - (destination.Price * 18) / 100;
+        ViewBag.KDV = (destination.Price * 18) / 100;
         ViewBag.Firm = destination.Bus;
 
         return View();
