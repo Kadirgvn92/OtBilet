@@ -21,7 +21,7 @@ public class EfTicketDal : GenericRepository<Ticket>, ITicketDal
     public Ticket GetTicketByDestinationID(int id)
     {
         using var context = new OtBiletDbContext();
-        var values = context.Tickets.Where(x => x.DestinationID == id).Include(y => y.Destination).Include(z => z.Passenger).FirstOrDefault();
+        var values = context.Tickets.Where(x => x.DestinationID == id).Include(y => y.Destination).Include(z => z.Passenger).Include(z => z.Destination.Bus).FirstOrDefault();
         return values;
     }
 }

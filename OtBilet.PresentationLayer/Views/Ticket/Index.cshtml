@@ -13,9 +13,9 @@
             <div class="card-body">
                 <div class="container mb-5 mt-3" style="width: 28rem;">
                     <div class="d-flex justify-content-around align-items-center">
-                        <img src="/AdminLTE-3.2.0/dist/img/metro.png" width="80px" height="80px">
+                        <img src="/AdminLTE-3.2.0/dist/img/@ViewBag.Firm.FirmImageUrl" width="120px" height="80px">
                         <div class="text-center align-middle mt-3">
-                            <p class="text-lg text-secondary font-weight-bold">@ViewBag.Firm</p>
+                            <p class="text-lg text-secondary font-weight-bold">@ViewBag.Firm.FirmName</p>
                         </div>
                     </div>
                     <hr />
@@ -40,17 +40,7 @@
                                         <div class="seats"> @ViewBag.SeatNumber  </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <hr />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>PNR</th>
-                                </tr>
-                                <tr>
-                                    <td>@ViewBag.PNR</td>
-                                </tr>
+                                
                                 <tr>
                                     <td>
                                         <hr />
@@ -138,7 +128,10 @@
             <div class="card-body">
                 <div class="container mb-5 mt-3 px-4" style="width: 30rem;">
                     <div class="d-flex justify-content-around align-items-center">
-                        <img src="/AdminLTE-3.2.0/dist/img/cards.png" width="270px" height="80px" alt="Metro Turizm">
+                        <img src="/AdminLTE-3.2.0/dist/img/credit/visa.png" alt="Visa">
+                        <img src="/AdminLTE-3.2.0/dist/img/credit/mastercard.png" alt="Mastercard">
+                        <img src="/AdminLTE-3.2.0/dist/img/credit/american-express.png" alt="American Express">
+                        <img src="/AdminLTE-3.2.0/dist/img/credit/paypal2.png" alt="Paypal">
                         <div class="text-center align-middle mt-3">
                             <p class="text-lg text-secondary font-weight-bold">Ödeme Bilgileri</p>
                         </div>
@@ -170,10 +163,13 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class="btn btn-primary btn-block mb-3">
-                                <span class="ps-3 text-lg text-light">Ödemeyi Tamamla</span>
-                                <span class="fas fa-arrow-right"></span>
-                            </div>
+                            <a href="/Ticket/CreateTicket/@ViewBag.Destination.DestinationID">
+                                <div class="btn btn-primary btn-block mb-3">
+                                    <span class="ps-3 text-lg text-light">Ödemeyi Tamamla</span>
+                                    <span class="fas fa-arrow-right"></span>
+                                </div>
+                            </a>
+                          
                         </div>
                     </div>
                 </div>

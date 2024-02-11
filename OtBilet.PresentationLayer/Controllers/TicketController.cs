@@ -15,6 +15,7 @@ public class TicketController : Controller
         _ticketService = ticketService;
         _passengerService = passengerService;
     }
+    [HttpGet]
     public IActionResult Index(int id)
     {
 
@@ -23,41 +24,43 @@ public class TicketController : Controller
         var PNR = PNRGenerator.GeneratePNR();
         var passenger = _passengerService.TGetByID(1);
         
-        Ticket ticket = new Ticket()
-        {
-            DestinationID = destination.DestinationID,
-            SeatNumber = seatNumber,
-            PassengerID = 1,
-            PNR = PNR
-        };
+        ViewBag.Destination = destination;
+        ViewBag.SeatNumber = seatNumber;
+        ViewBag.PNR = PNR;
+        ViewBag.Passenger = passenger;
+        ViewBag.Firm = destination.Bus;
 
+        return View();
 
-        _ticketService.TAdd(ticket);
+    }
+    [HttpGet]
+    public IActionResult CreateTicket(int id)
+    {
+        var destination = _destinationService.GetDestinationByID(id);
+        int seatNumber = Convert.ToInt32(Request.Query["seatNumber"]);
+        var PNR = PNRGenerator.GeneratePNR();
+        var passenger = _passengerService.TGetByID(1);
 
         ViewBag.Destination = destination;
         ViewBag.SeatNumber = seatNumber;
         ViewBag.PNR = PNR;
         ViewBag.Passenger = passenger;
+        ViewBag.Firm = destination.Bus;
 
-        var values = _ticketService.GetTicketByDestinationID(id);
-
-        return View(values);
-
+        return View();
     }
-    //[HttpPost]
-    //public IActionResult Index(CreateTicketDTO dto)
-    //{
-    //    var destination = _destinationService.GetDestinationByID(dto.DestinationID);
-    //    int seatNumber = Convert.ToInt32(Request.Query["seatNumber"]);
-    //    _ticketService.TAdd(new Ticket()
-    //    {
-    //        DestinationID = destination.DestinationID,
-    //        SeatNumber = seatNumber,
-    //        PassengerID = 1,
-    //        PNR = PNRGenerator.GeneratePNR()
-    //    });
+    [HttpPost]
+    public IActionResult CreateTicket(CreateTicketDTO dto)
+    {
 
-    //    _ticketService.TAdd(ticket);
-    //    return RedirectToAction("Index", "Dashboard");
-    //}
+        _ticketService.TAdd(new Ticket()
+        {
+            DestinationID = dto.DestinationID,
+            SeatNumber = dto.SeatNumber,
+            PassengerID = 1,
+            PNR = PNRGenerator.GeneratePNR()
+        });
+
+        return RedirectToAction("Invoice", "Ticket");
+    }
 }

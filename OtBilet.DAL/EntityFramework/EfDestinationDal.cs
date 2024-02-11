@@ -26,7 +26,7 @@ public class EfDestinationDal : GenericRepository<Destination>, IDestinationDal
     public Destination GetDestinationByID(int id)
     {
         using var context = new OtBiletDbContext();
-        var destination = context.Destinations.Where(x => x.DestinationID == id).FirstOrDefault();
+        var destination = context.Destinations.Where(x => x.DestinationID == id).Include(y => y.Bus).FirstOrDefault();
         return destination;
     }
 }
