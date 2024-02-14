@@ -1,16 +1,44 @@
-﻿
+﻿@model List<Seat>
 
-@model List<Seat>
 
-<div class="form-group">
-    <select class="form-control" id="seatNumberInput" required>
-        <option value="">Koltuk Seçin</option>
-        @foreach (var seatNumber in Model)
-        {
-            if (seatNumber.IsAvailable)
-            {
-                <option value="@seatNumber.SeatNumber">@seatNumber.SeatNumber</option>
-            }
-        }
-    </select>
+<div class="row mt-3">
+    <div class="col-md-2">
+        <form id="seatForm">
+            <div class="form-group d-flex justify-content-between m-3 ">
+                <select class="form-control mr-2" id="seatNumberInput" required>
+                    <option value="">Koltuk Seçin</option>
+                    @foreach (var seatNumber in Model)
+                    {
+                        if (seatNumber.IsAvailable)
+                        {
+                            <option value="@seatNumber.SeatNumber">@seatNumber.SeatNumber</option>
+                        }
+                    }
+                </select>
+
+                <button type="submit" class="btn btn-primary">Seç</button>
+            </div>
+        </form>
+    </div>
 </div>
+
+
+
+@section Scripts {
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"/> 
+
+    <script>
+        $(document).ready(function () {
+            $('#seatForm').submit(function (e) {
+                e.preventDefault(); // Formun normal submit işlemini engelle
+
+                var seatNumber = $('#seatNumberInput').val(); // Seçilen koltuk numarasını al
+
+                // Koltuk numarasını TicketController'ın Index action'ına gönder
+                window.location.href = "/Dashboard/Index?seatNumber=" + seatNumber;
+         
+            });
+        });
+    </script>
+}

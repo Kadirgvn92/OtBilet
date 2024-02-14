@@ -3,22 +3,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using OtBilet.BusinessLayer.Abstract;
 using OtBilet.DTOLayer.DestinationDTO;
 using OtBilet.EntityLayer;
+using OtBilet.PresentationLayer.Models;
+using System;
 
 namespace OtBilet.PresentationLayer.Controllers;
 public class DashboardController : Controller
 {
 	private readonly IDestinationService _destinationService;
+    private readonly ISeatService _seatService;
 
-    public DashboardController(IDestinationService destinationService)
+    public DashboardController(IDestinationService destinationService, ISeatService seatService)
     {
         _destinationService = destinationService;
+        _seatService = seatService;
     }
-    [HttpGet]
     public IActionResult Index()
     {
-        
         return View();
     }
+
 
     [HttpGet]
     public IActionResult SearchDestination()
@@ -58,6 +61,7 @@ public class DashboardController : Controller
         }
         // _destinationService.TGetDestinationsByFilter metodunu kullanarak destinasyonları çektim
         var destinations = _destinationService.TGetDestinationsByFilter(destinationDTO);
+
 
         // Elde ettiğin destinasyonları bir view'e gönderdim
         return View("Index", destinations);

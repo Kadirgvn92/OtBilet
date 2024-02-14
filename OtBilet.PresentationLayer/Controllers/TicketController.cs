@@ -24,16 +24,18 @@ public class TicketController : Controller
         var destination = _destinationService.GetDestinationByID(id);
         var PNR = PNRGenerator.GeneratePNR();
         var passenger = _passengerService.TGetByID(1);
-        var seats = _seatService.TGetSeatsByBusID(destination.BusID);
-        
+        var seat = Request.Query["seatNumber"];
+
         ViewBag.Destination = destination;
         ViewBag.PNR = PNR;
         ViewBag.Passenger = passenger;
         ViewBag.Firm = destination.Bus;
+        ViewBag.SeatNumber = seat;
 
-        return View(seats);
+        return View();
 
     }
+
     public IActionResult CreateTicket(int id, int seatNumber)
     {
 

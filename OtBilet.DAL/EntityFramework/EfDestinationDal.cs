@@ -20,7 +20,7 @@ public class EfDestinationDal : GenericRepository<Destination>, IDestinationDal
     public List<Destination> GetDestinationsByFilter(SearchDestinationDTO destination)
     {
         using var context = new OtBiletDbContext();
-        var values = context.Destinations.Where(x => x.Arrive == destination.Arrive && x.Departure == destination.Departure && x.DepatureDate == destination.DepatureDate).Include(y => y.Bus).ToList();
+        var values = context.Destinations.Where(x => x.Arrive == destination.Arrive && x.Departure == destination.Departure && x.DepatureDate == destination.DepatureDate).Include(y => y.Bus).Include(z => z.Bus.Seat).ToList();
         return values;
     }
     public Destination GetDestinationByID(int id)

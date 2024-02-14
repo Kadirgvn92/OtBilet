@@ -43,7 +43,7 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr data-widget="expandable-table" aria-expanded="false">
+                                        <tr data-widget="expandable-table" aria-expanded="false" data-bus-id="@item.BusID">
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div class="mr-4">
@@ -78,17 +78,23 @@
                                         <tr class="expandable-body">
                                             <td colspan="4" class="text-center">
                                                 <img src="/AdminLTE-3.2.0/dist/img/bus.png" width="800px" height="300px" />
-                                                @* &emsp;
+                                                &emsp;
                                                 <label>Koltuk No Seçin</label>
                                                 &emsp;
-                                                <input id="seatNumberInput_@item.DestinationID" required type="number" min="1" max="38" placeholder="No" />
-                                                &emsp; *@
+                                                <select class="form-control" id="seatNumberInput" required>
+                                                    <option value="">Koltuk Seçin</option>
+                                                    @foreach (var seatNumber in item.Bus.Seat)
+                                                    {
+                                                        if (seatNumber.IsAvailable)
+                                                        {
+                                                            <option value="@seatNumber.SeatNumber">@seatNumber.SeatNumber</option>
+                                                        }
+                                                    }
+                                                </select>
+                                                &emsp;
 
-                                                @await Component.InvokeAsync("_TicketSeatNumberPartial", new { id = item.DestinationID})
-
-                                                <a id="continueButton" href="/Ticket/Index/@item.DestinationID" class="btn btn-success">Onayla ve Devam Et</a>
+                                                <a id="continueButton" href="Ticket/Index/@item.DestinationID" class="btn btn-success">Onayla ve Devam Et</a>
                                             </td>
-
                                         </tr>
                                     }
                                 </tbody>
@@ -114,6 +120,17 @@
             $('.expandable-body').not(expandableBody).hide();
 
             expandableBody.toggle();
+
+            
+        });
+
+
+        // Devam et butonuna tıklanınca işlemi tamamla
+        $('#continueButton').click(function (e) {
+            e.preventDefault();
+            var seatNumber = $('#seatNumberInput').val();
+            var destinationID = $(this).attr('href').split('/').pop(); // destinationID'yi alma
+            window.location.href = "/Ticket/Index/" + destinationID + "?seatNumber=" + seatNumber;
         });
 
 
