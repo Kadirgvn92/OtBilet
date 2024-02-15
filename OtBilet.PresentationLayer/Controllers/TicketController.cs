@@ -9,13 +9,11 @@ public class TicketController : Controller
 {
     private readonly ITicketService _ticketService;
     private readonly IDestinationService _destinationService;
-    private readonly IPassengerService _passengerService;
     private readonly ISeatService _seatService;
-    public TicketController(ITicketService ticketService, IDestinationService destinationService, IPassengerService passengerService, ISeatService seatService)
+    public TicketController(ITicketService ticketService, IDestinationService destinationService, ISeatService seatService)
     {
         _destinationService = destinationService;
         _ticketService = ticketService;
-        _passengerService = passengerService;
         _seatService = seatService;
     }
     public IActionResult Index(int id)
@@ -23,7 +21,7 @@ public class TicketController : Controller
 
         var destination = _destinationService.GetDestinationByID(id);
         var PNR = PNRGenerator.GeneratePNR();
-        var passenger = _passengerService.TGetByID(1);
+        var passenger = 1;
         var seat = Request.Query["seatNumber"];
 
         ViewBag.Destination = destination;
@@ -41,13 +39,13 @@ public class TicketController : Controller
 
         var destination = _destinationService.GetDestinationByID(id);
         var PNR = PNRGenerator.GeneratePNR();
-        var passenger = _passengerService.TGetByID(1);
+        var passenger = 1;
 
         _ticketService.TAdd(new Ticket()
         {
             DestinationID = destination.DestinationID,
             SeatNumber = seatNumber,
-            PassengerID = 1,
+            AppUserID = 1,
             PNR = PNR
         });
 

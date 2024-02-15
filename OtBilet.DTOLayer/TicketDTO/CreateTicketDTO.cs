@@ -1,4 +1,5 @@
 ﻿using OtBilet.EntityLayer;
+using OtBilet.EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,7 @@ public class CreateTicketDTO
     public int PassengerID { get; set; }
     public bool Luggage { get; set; }
     public Gender Gender { get; set; }
-    public Passenger Passenger { get; set; }
+    public AppUser AppUser { get; set; }
     public int DestinationID { get; set; }
     public Destination Destination { get; set; }
-}
-public enum Gender
-{
-    Man = 0,
-    Woman = 1
 }

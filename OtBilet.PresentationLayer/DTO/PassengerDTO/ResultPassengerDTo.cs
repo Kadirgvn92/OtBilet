@@ -1,4 +1,5 @@
 ﻿using OtBilet.EntityLayer;
+using OtBilet.EntityLayer.Entities;
 
 namespace OtBilet.PresentationLayer.DTO.PassengerDTO;
 

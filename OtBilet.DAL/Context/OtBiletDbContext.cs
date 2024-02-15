@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using OtBilet.EntityLayer;
+using OtBilet.EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace OtBilet.DAL.Context;
-public class OtBiletDbContext : DbContext
+public class OtBiletDbContext : IdentityDbContext<AppUser,AppRole,int>
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -17,9 +19,6 @@ public class OtBiletDbContext : DbContext
     }
     public DbSet<Bus> Buses { get; set; }
     public DbSet<Destination> Destinations { get; set; }
-    public DbSet<Passenger> Passengers { get; set; }
     public DbSet<Seat> Seats { get; set; }
     public DbSet<Ticket> Tickets { get; set; }
-
-    
 }

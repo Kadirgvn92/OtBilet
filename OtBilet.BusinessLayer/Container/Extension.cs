@@ -28,9 +28,10 @@ public static class Extension
 
         services.AddScoped<ITicketService, TicketManager>();
         services.AddScoped<ITicketDal, EfTicketDal>();
+        
+        services.AddScoped<IAppUserService, AppUserManager>();
+        services.AddScoped<IAppUserDal, EfAppUserDal>();
 
-        services.AddScoped<IPassengerService, PassengerManager>();
-        services.AddScoped<IPassengerDal, EfPassengerDal>();
 
         services.AddScoped<IBusService, BusManager>();
         services.AddScoped<IBusDal, EfBusDal>();

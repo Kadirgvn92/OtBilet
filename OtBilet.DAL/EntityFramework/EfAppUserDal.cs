@@ -1,7 +1,7 @@
 ﻿using OtBilet.DAL.Abstract;
 using OtBilet.DAL.Context;
 using OtBilet.DAL.Repository;
-using OtBilet.EntityLayer;
+using OtBilet.EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace OtBilet.DAL.EntityFramework;
-public class EfPassengerDal : GenericRepository<Passenger>,IPassengerDal
+public class EfAppUserDal : GenericRepository<AppUser>,IAppUserDal
 {
-	public EfPassengerDal(OtBiletDbContext db) : base(db)
-	{
-	}
+    public EfAppUserDal(OtBiletDbContext db) : base(db)
+    {
+    }
 }

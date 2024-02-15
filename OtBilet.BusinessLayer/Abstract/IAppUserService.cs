@@ -1,4 +1,4 @@
-﻿using OtBilet.EntityLayer;
+﻿using OtBilet.EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace OtBilet.BusinessLayer.Abstract;
-public interface IPassengerService : IGenericService<Passenger>
+public interface IAppUserService : IGenericService<AppUser>
 {
 }

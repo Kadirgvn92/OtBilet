@@ -1,7 +1,13 @@
-﻿namespace OtBilet.EntityLayer;
-public class Passenger 
+﻿using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OtBilet.EntityLayer.Entities;
+public class AppUser : IdentityUser<int>
 {
-    public int PassengerID { get; set; } 
     public string NationalCardNo { get; set; }
     public string Name { get; set; }
     public string Surname { get; set; }
